@@ -1,0 +1,16 @@
+@import "~bootstrap/dist/css/bootstrap.css";  
+
+  datalist {
+    display: flex;
+    justify-content: space-between;
+    color: rgb(160, 160, 160);
+    width: 50%;
+  }
+  
+  #monthlyAmountSlider,
+  #rateOfInterestSlider,
+  #timePeriodSlider {
+    width: 100%;
+  }
+  
+  
