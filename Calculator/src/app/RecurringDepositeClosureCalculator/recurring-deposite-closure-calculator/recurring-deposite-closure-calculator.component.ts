@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-recurring-deposite-closure-calculator',
   templateUrl: './recurring-deposite-closure-calculator.component.html',
@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecurringDepositeClosureCalculatorComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: Router) {}
 
   ngOnInit(): void {
   }
-
+  homePage() {
+    this.route.navigate([''])
+  }
 }
