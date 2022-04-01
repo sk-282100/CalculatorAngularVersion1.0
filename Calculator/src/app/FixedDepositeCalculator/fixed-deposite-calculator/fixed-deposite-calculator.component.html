@@ -1,1 +1,98 @@
-<p>fixed-deposite-calculator works!</p>
+
+    <div class="mt-3 calculator">
+        <h4 class="mb-2" (click)="toFixedDeposit()">Fixed Deposit Calculator</h4>
+    </div>
+
+    <div class="container col-8 div">
+
+        <button class="btn btn-primary m-2" (click)='homePage()'> Homepage </button>
+
+
+        <div class="container">
+            <div class=" my-2">
+                <div class="d-flex justify-content-between">
+                    <label> Deposit Amount </label>
+                    <div class="flex-nowrap input-group w-25">
+                        <span class="input-group-text" id="addon-wrapping">₹</span>
+                        <input type="text" class="form-control disabled w-auto" id="depositeAmount" readonly
+                            value="1,000" />
+                        <input type="hidden" id="hddepositeAmount" value="1000">
+                    </div>
+                </div>
+                <input id="depositeAmountSlider" class="slider" type="range" name="range" step="500" min="1000"
+                    max="100000" value="1000"(change)="getdepositeValue($event)" (oninput)="getdepositeValue($event)">
+                <datalist id="depositeAmountSlider">
+                    <option value="1,000" label="1,000" ></option>
+                    <option value="50" label="50,000"></option>
+                    <option value="100" label="1,00,000"></option>
+                </datalist>
+            </div>
+
+            <div class=" my-2">
+                <div class="d-flex justify-content-between">
+                    <label>Interest rate in %</label>
+                    <input type="text" class="form-control disabled w-auto" id="roi" readonly value="1%" />
+                    <input type="hidden" id="hdroi" value="1">
+                </div>
+                <input id="roiSlider" class="slider" type="range" name="range" step="0.5" min="1" max="15" value="1" (change)="getRoiValue($event)" (oninput)="getRoiValue($event)">
+                <datalist id="roiSlider">
+                    <option value="1" label="1%"></option>
+                    <option value="5" label="10%"></option>
+                    <option value="10" label="15%"></option>
+                </datalist>
+            </div>
+
+            <div class=" my-2">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <label for="tenure">Tenure</label>
+                        <select (change)="getTenure()" name="tenure" class="" id="tenure">
+                            <option value=365 class="dropdown-item">Days</option>
+                            <option value=12 class="dropdown-item">Monthly</option>
+                            <option value=1 class="dropdown-item">Yearly</option>
+                        </select>
+                    </div>
+                    <input type="text" class="form-control disabled w-auto" id="tenureValue" readonly value="1" />
+                </div>
+                <input id="tenureSlider" type="range" name="range" step="1" min="1" max="100" (change)="getTenureValue($event)" (oninput)="getTenureValue($event)" value="1"
+                    onchange="rangePrimary2.value=value" >
+                <datalist id="tenureSlider">
+                    <option value="1" label="1"></option>
+                    <option value="50" label="50"></option>
+                    <option value="100" label="100"></option>
+                </datalist>
+            </div>
+            <div class="my-2">
+                <label>Type of fixed deposit</label>
+                <div>
+                    <label class="radio-inline" style="margin-right: 10px;">
+                        <input (click)="getRadioValue(12)" class="fix-deposit-radio flex-column form-check-input " type="radio"
+                            style="margin-right: 5px; " value=12 name="optradio" checked>
+                        Monthly Payout
+                    </label>
+                    <label class="radio-inline" style="margin-right: 10px;">
+                        <input (click)="getRadioValue(4)" class="fix-deposit-radio flex-column form-check-input" type="radio" value=4
+                            style="margin-right: 5px; " name="optradio">Quarterly Payout
+                    </label>
+                    <label class="radio-inline" style="margin-right: 10px;">
+                        <input (click)="getRadioValue(6)" class="fix-deposit-radio flex-column form-check-input" type="radio" value=6
+                            style="margin-right: 5px; " name="optradio">Half Yearly Payout
+                    </label>
+                    <label class="radio-inline" style="margin-right: 10px;">
+                        <input  type="radio" class="flex-column form-check-input" name="optradio"
+                            style="margin-right: 5px;">Reinvestment/Cumulative
+                    </label>
+                </div>
+            </div>
+
+            <div class="calculate mt-4">
+                <button type="button" id="calculate-button" class="btn btn-primary" (click)="getMaturityValue()"> Calculate </button>
+            </div>
+
+            <div class="total mt-4">
+                <p>Maturity Amount: <span id="maturity"></span></p>
+                <p>Total Intrest Earned: <span id="totIntrest"></span></p>
+            </div>
+
+        </div>
+    </div>

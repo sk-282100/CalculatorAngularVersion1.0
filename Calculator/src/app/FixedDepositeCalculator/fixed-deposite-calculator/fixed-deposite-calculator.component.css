@@ -1,0 +1,55 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.div{
+    border: 2px solid rgb(17, 171, 223);
+    margin-left: 20px;
+    margin: 0 auto;
+}
+
+
+.deposit-result{
+    width: 30px;
+    height: 15px;
+}
+
+h4{
+    margin-left: 20px;
+    margin: 0 auto;
+    width:fit-content;
+}
+datalist {
+    display: flex;
+    justify-content: space-between;
+    color: rgb(160, 160, 160);
+    width: 50%;
+  }
+  
+ 
+/* .inputText{
+    border: 1.5px solid #81CBF6;
+} */
+#depositeAmountSlider,#roiSlider,#tenureSlider{
+    width: 100%;
+}
+
+.calculate button {  
+    display: block;
+    margin-left: auto;
+    margin-right: auto; 
+    color: white;
+ 
+    }  
+
+p{
+  margin-bottom: 0;
+ }
+.total {
+    background-color: #0d6efd ;
+    color: white;
+    margin-left: auto;
+    margin-right: auto; 
+    width: fit-content;
+    padding: 5px 100px;
+    margin-bottom: 20px;
+}
+
