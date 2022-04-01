@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Chart } from 'node_modules/chart.js';
 
 @Component({
   selector: 'app-recurring-deposit-calculator-component',
@@ -15,16 +14,12 @@ export class RecurringDepositCalculatorComponentComponent implements OnInit {
   maturityAmout: any;
   totalInvestment: any;
   totalIntrest: any;
-  CanvasJS:any;
+  CanvasJS: any;
   e: any;
   d: any;
   constructor(private route: Router) {}
 
-  ngOnInit(): void {
-
-
-    
-  }
+  ngOnInit(): void {}
   homePage() {
     this.route.navigate(['']);
   }
@@ -85,7 +80,7 @@ export class RecurringDepositCalculatorComponentComponent implements OnInit {
     ).toFixed(0);
     // var chart = new Chart("chartContainer", {
     //   animationEnabled: true,
-      
+
     //   data: [
     //     {
     //       showInLegend: true,
@@ -98,18 +93,17 @@ export class RecurringDepositCalculatorComponentComponent implements OnInit {
     //         {
     //           y: this.monthlyAmountSliderValue * this.timePeriodSliderValue,
     //           label: "Total Investment",
-            
+
     //         },
     //         {
     //           y: this.maturityAmout - this.monthlyAmountSliderValue * this.timePeriodSliderValue,
     //           label: "Total Intrest",
-              
+
     //         },
     //       ],
     //     },
     //   ],
     // });
     // chart.render();
-    
   }
 }
