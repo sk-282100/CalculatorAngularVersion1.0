@@ -14,7 +14,7 @@ import{MatTabsModule} from '@angular/material/tabs';
   declarations: [
     AppComponent,
   
-    routingComponents,
+    routingComponents
         
   
         

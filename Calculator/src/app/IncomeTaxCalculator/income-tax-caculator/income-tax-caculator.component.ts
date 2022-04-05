@@ -99,7 +99,7 @@ selectedList:any
   }
   
 // changetab(salarydetail:any){
-//   this.selectedList= salarydetail
+//   this.selectedLis
 //   }
 
 onTabChange(event:any){
