@@ -4,8 +4,8 @@
     </div>
     <div class="rows container">
         <div class="col-12 float-lg-start border border-primary p-2 m-0 border-2">
-            <button class="btn btn-primary m-2" (click)='homePage()'> Homepage </button>
-            <form>
+            <button class="btn btn-primary " (click)='homePage()'> Homepage </button>
+            <form class="m-2">
                 <div>
                     <div class="container col-6 float-lg-start">
                         <div class="">
@@ -13,14 +13,13 @@
                                 <label>Monthly Investment*</label>
                                 <div class="flex-nowrap input-group w-25">
                                     <span class="input-group-text" id="addon-wrapping">₹</span>
-                                    <input type="text" class="form-control disabled w-25" id="monthlyInvestment"
-                                        readonly value="1,000" />
-                                    <input type="hidden" id="hdMonthlyAmount" value="1000">
+
+                                    <input type="text" name="monthlyAmount" class="form-control disabled w-25" readonly
+                                        [(ngModel)]="monthlyAmountSliderValue" />
                                 </div>
                             </div>
                             <input id="monthlyAmountSlider" type="range" name="range" step="500" min="1000" max="100000"
-                                value="1000" />
-
+                                value="1000" [(ngModel)]="monthlyAmountSliderValue" />
                             <datalist id="monthlyAmountSlider">
                                 <option value="1,000" label="1,000"></option>
 
@@ -32,12 +31,16 @@
                         <div class="">
                             <div class="d-flex justify-content-between">
                                 <label>Rate of Interest*</label>
-                                <input type="text" class="form-control disabled w-25" id="rateOfInterest" readonly
-                                    value="1%" />
-                                <input type="hidden" id="hdRateOfIntrest" value="1">
+                                <div class="flex-nowrap input-group w-25">
+                                    <input type="text" name="rateOfInterest" class="form-control disabled w-25"
+                                        id="rateOfInterest" readonly value="1%"
+                                        [(ngModel)]="rateOfInterestSliderValue" />
+                                    <span class="input-group-text" id="addon-wrapping">%</span>
+                                </div>
                             </div>
                             <input id="rateOfInterestSlider" type="range" name="range" step="0.5" min="1" max="15"
-                                value="1" />
+                                value="1" [(ngModel)]="rateOfInterestSliderValue" />
+
                             <datalist id="rateOfInterestSlider">
                                 <option value="1" label="1%"></option>
 
@@ -49,11 +52,12 @@
                         <div class="">
                             <div class="d-flex justify-content-between">
                                 <label>Time Period(months)</label>
-                                <input type="text" class="form-control disabled w-25" id="timePeriod" readonly
-                                    value="1" />
+                                <input type="text" name="timePeriod" class="form-control disabled w-25" id="timePeriod"
+                                    readonly value="1" [(ngModel)]="timePeriodSliderValue" />
                             </div>
-                            <input id="timePeriodSlider" type="range" name="range" step="1" min="1" max="100"
-                                value="1" />
+                            <input id="timePeriodSlider" type="range" name="range" step="1" min="1" max="100" value="1"
+                                [(ngModel)]="timePeriodSliderValue" />
+
                             <datalist id="timePeriodSlider">
                                 <option value="1" label="1"></option>
                                 <option value="50" label="50"></option>
@@ -64,7 +68,7 @@
                             <div class="d-flex justify-content-start">
                                 <label for="interestCompounding">Interest Compounding: </label>
                                 <select name="interestCompounding" class="form-select w-25" id="interestCompounding"
-                                    required>
+                                    [(ngModel)]="interestCompoundingValue">
                                     <option class="dropdown-item" value="3">Quarterly</option>
                                     <option class="dropdown-item" value="6">Half-Yearly</option>
                                     <option class="dropdown-item" value="12">Yearly</option>
@@ -73,26 +77,29 @@
                             </div>
                         </div>
                         <div class="py-3">
-                            <button type="button" class="btn btn-primary" id="show-maturity-value">Show
+                            <button type="button" class="btn btn-primary" id="show-maturity-value"
+                                (click)="Calculate()">Show
                                 Maturity Value</button>
 
                             <div class="d-flex flex-row text-center h6 active mt-3">
 
                                 <span class="border border-primary  rounded-2 flex-sm-fill btn-primary ">Total
-                                    Investment:<p id="tInvestment"></p>
+                                    Investment:<p id="tInvestment">{{totalInvestment}}</p>
                                 </span>&nbsp;&nbsp;&nbsp;&nbsp;
                                 <span class="border border-primary  rounded-2 flex-sm-fill btn-primary">Total
-                                    Interest:<p id="tIntrest"></p>
+                                    Interest:<p id="tIntrest">{{totalIntrest}}</p>
                                 </span>&nbsp;&nbsp;&nbsp;&nbsp;
                                 <span class="border border-primary  rounded-2 flex-sm-fill btn-primary">Maturity
-                                    Value:<p id="mValue"></p></span>
+                                    Value:<p id="mValue">{{maturityAmout}}</p></span>
                             </div>
                         </div>
 
                     </div>
                     <div class="col-5 float-md-end container">
-                        <div id="chartContainer" style="height: 350px; width: 300px;"></div>
+
+                        <div #chartContainer style="height: 350px; width: 300px;"></div>
                     </div>
+
                 </div>
             </form>
         </div>
