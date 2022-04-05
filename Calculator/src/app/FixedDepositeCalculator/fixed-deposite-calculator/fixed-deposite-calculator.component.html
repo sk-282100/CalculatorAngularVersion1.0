@@ -15,8 +15,8 @@
                     <div class="flex-nowrap input-group w-25">
                         <span class="input-group-text" id="addon-wrapping">₹</span>
                         <input type="text" class="form-control disabled w-auto" id="depositeAmount" readonly
-                            value="1,000" />
-                        <input type="hidden" id="hddepositeAmount" value="1000">
+                            value={{depositeAmount}} />
+                        <input type="hidden" id="hddepositeAmount" value={{hddepositeAmount}}>
                     </div>
                 </div>
                 <input id="depositeAmountSlider" class="slider" type="range" name="range" step="500" min="1000"
@@ -31,8 +31,8 @@
             <div class=" my-2">
                 <div class="d-flex justify-content-between">
                     <label>Interest rate in %</label>
-                    <input type="text" class="form-control disabled w-auto" id="roi" readonly value="1%" />
-                    <input type="hidden" id="hdroi" value="1">
+                    <input type="text" class="form-control disabled w-auto" id="roi" readonly value={{roi}} />
+                    <input type="hidden" id="hdroi" value={{hdroi}}>
                 </div>
                 <input id="roiSlider" class="slider" type="range" name="range" step="0.5" min="1" max="15" value="1" (change)="getRoiValue($event)" (oninput)="getRoiValue($event)">
                 <datalist id="roiSlider">
@@ -46,13 +46,13 @@
                 <div class="d-flex justify-content-between">
                     <div>
                         <label for="tenure">Tenure</label>
-                        <select (change)="getTenure()" name="tenure" class="" id="tenure">
+                        <select (change)="getTenure($event)" name="tenure" class="" id="tenure">
                             <option value=365 class="dropdown-item">Days</option>
                             <option value=12 class="dropdown-item">Monthly</option>
                             <option value=1 class="dropdown-item">Yearly</option>
                         </select>
                     </div>
-                    <input type="text" class="form-control disabled w-auto" id="tenureValue" readonly value="1" />
+                    <input type="text" class="form-control disabled w-auto" id="tenureValue" readonly value={{tenureValue}} />
                 </div>
                 <input id="tenureSlider" type="range" name="range" step="1" min="1" max="100" (change)="getTenureValue($event)" (oninput)="getTenureValue($event)" value="1"
                     onchange="rangePrimary2.value=value" >
@@ -90,8 +90,8 @@
             </div>
 
             <div class="total mt-4">
-                <p>Maturity Amount: <span id="maturity"></span></p>
-                <p>Total Intrest Earned: <span id="totIntrest"></span></p>
+                <p>Maturity Amount: <span id="maturity"> {{maturity}}</span></p>
+                <p>Total Intrest Earned: <span id="totIntrest"> {{totIntrest}} </span></p>
             </div>
 
         </div>

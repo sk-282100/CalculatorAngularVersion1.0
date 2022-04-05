@@ -18,7 +18,7 @@ export class FixedDepositeCalculatorComponent implements OnInit {
  }
 
  toFixedDeposit(){
-   // console.log("hrushsu");
+  
    this.route.navigate(['/fixeddepositecalculator'])
 
 }
@@ -28,6 +28,13 @@ homePage() {
 }
  fdr=1;
  toYears:Number=365;
+ depositeAmount=1000;
+ hddepositeAmount=1000;
+ roi=1+"%";
+ hdroi=1;
+ tenureValue=1;
+ maturity;
+ totIntrest;
 
 //To get type of fixed deposite 
 //  $(".fix-deposit-radio").click(function(){
@@ -41,12 +48,11 @@ homePage() {
   }
 
    //To get Tensure type value from dropdown 
-    e;
-    text:Number;
-   getTenure(){
-    this.e = document.getElementById("tenure");
-    this.text = Number(this.e.options[this.e.selectedIndex].value);
-    this.toYears=Number(this.text);
+   
+
+
+   getTenure(event){
+    this.toYears = Number(event.target.value);
     console.log(this.toYears);
    }
    
@@ -54,28 +60,28 @@ homePage() {
     
     getdepositeValue(event) {
       
-      (document.getElementById("depositeAmount") as HTMLInputElement).value=event.target.value;
-      (document.getElementById("hddepositeAmount") as HTMLInputElement).value=event.target.value;
+      this.depositeAmount=event.target.value;
+      this.hddepositeAmount=event.target.value;
       console.log(event.target.value);
    }
    
    getRoiValue(event) {
       
-    (document.getElementById("roi") as HTMLInputElement).value=event.target.value+'%';
-    (document.getElementById("hdroi") as HTMLInputElement).value=event.target.value;
+    this.roi=event.target.value+'%';
+    this.hdroi=Number(event.target.value);
     console.log(event.target.value);
  }
   
  getTenureValue(event) {
       
-  (document.getElementById("tenureValue") as HTMLInputElement).value=event.target.value;
+  this.tenureValue=event.target.value;
   console.log(event.target.value);
 }
 
 getMaturityValue() {
-  var depositAmount=Number((document.getElementById("hddepositeAmount")as HTMLInputElement).value)
-  var intrestRate= Number((document.getElementById("hdroi")as HTMLInputElement).value)
-  var tenure=Number((document.getElementById("tenureValue")as HTMLInputElement).value)
+  var depositAmount=this.hddepositeAmount;
+  var intrestRate= this.hdroi;
+  var tenure=this.tenureValue;
   var fixedDeposit=this.fdr; 
 
   var maturityAmout=depositAmount*Math.pow(1+((intrestRate/100)/fixedDeposit),fixedDeposit*(tenure/Number(this.toYears)))
@@ -84,10 +90,9 @@ getMaturityValue() {
   totalIntrest=Number(totalIntrest.toFixed(2));
 
   console.log(maturityAmout);
-  document.getElementById("maturity").innerHTML=String(maturityAmout)
-  document.getElementById("totIntrest").innerHTML=String(totalIntrest)
+  this.maturity=String(maturityAmout)
+  this.totIntrest=String(totalIntrest)
 
-  
-}
+  }
 
 }
