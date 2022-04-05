@@ -24,4 +24,8 @@ export class HomePageComponent implements OnInit {
   recurringDepositeClosureCalculator(){
   this.route.navigate(['/RecurringDepositeClosureCalculator'])
   }
+  incometaxCalculator() {
+    this.route.navigate(['/IncomeTaxCalculator']);
+  }
+  
 }

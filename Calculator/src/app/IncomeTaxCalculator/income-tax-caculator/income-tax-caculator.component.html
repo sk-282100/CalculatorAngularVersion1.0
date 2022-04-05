@@ -1,1 +1,771 @@
-<p>income-tax-caculator works!</p>
+<div class="container">
+    <div class="mt-3 calculator">
+        <h4 class="mb-2 text-center p-1">Income Tax Calculator</h4>
+    </div>
+    <div class="rows container">
+
+        <div class="col-md-5 container " style="border: 3px solid #0099CC; ">
+            <button class="btn btn-primary m-2" (click)='homePage()'> Homepage </button>
+
+
+            <!-- <div class="col-md-5 container " style="border: 3px solid #0099CC; "> -->
+            <!-- Start: Basic Details -->
+            <div id="dvBasicDetail">
+                <div class="row">
+                    <div class="">
+                        <h5 class="font-weight-bold">Enter Basic Details</h5>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label>
+                        <h6 for="age" class="label1">Age:</h6>
+                    </label>
+                    <div>
+                        <select name="age" id="age" class="form-select w-auto" required [(ngModel)]="age">
+                            <option value="1">18 to 59</option>
+                            <option value="2">59 or above</option>
+                        </select>
+                        
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label>
+                        <h6 for="city" class="label1">Resident city type:</h6>
+                    </label>
+                    <div class="">
+                        <select name="city" id="city" class="form-select w-auto" required [(ngModel)]="city">
+                            <option value="1">Metro</option>
+                            <option value="2">Urban</option>
+                            <option value="3">Rural</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label>
+                        <h6 for="Recidence" class="label1">Resident Type:</h6>
+                    </label>
+                    <div class=" d-flex">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="RecidenceS" id="selfOwned" value="1"
+                                checked="checked" [(ngModel)]="RecidenceS">
+                            <label class="form-check-label" for="selfOwned">
+                                Self owned
+                            </label>
+                        </div>
+
+                        <div class="form-check mx-3">
+                            <input class="form-check-input" type="radio" name="RecidenceS" value="2" id="rented" [(ngModel)]="RecidenceS">
+                            <label class="form-check-label" for="rented">
+                                Rented
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label>
+                        <h6 for="occupation" class="label1">Occupation:</h6>
+                    </label>
+                    <div class="">
+                        <select name="occupation" id="occupation" class="form-select w-auto" required [(ngModel)]="occupation">
+                            <option value="1">Self Employed</option>
+                            <option value="2">Government</option>
+                            <option value="3 ">Private</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="">
+                        <p><button class="btn btn-primary" id="btnBasicDetail"
+                                (click)="showSalaryDetails()">Continue</button></p>
+                    </div>
+                </div>
+            </div>
+            <!-- End: Basic Details -->
+
+            <!-- Start: Salary Details -->
+            <!-- {{isSalaryDetailsShow}} -->
+            <div *ngIf="isSalaryDetailsShow" #dvSalaryDetail>
+                <div class="row">
+                    <div class="">
+                        <h5 class="font-weight-bold"> Salary Details</h5>
+                    </div>
+                </div>
+
+                <div class="row">
+                    
+                    <div class="tab">
+                        <mat-tab-group mat-align-tabs="center" (selectedIndexChange)="onTabChange($event)" [selectedIndex]="active" animationDuration="100ms">
+                            <mat-tab label="Monthly">
+                                <div class="row mb-3">
+                                    <label>
+                                        <h6 for="age" class="label1">Monthly Basic Salary:</h6>
+                                    </label>
+
+                                    <div class="flex-nowrap input-group w-50">
+                                        <span class="input-group-text" id="addon-wrapping">₹</span>
+                                        <input type="number" id="monthlybasic" [(ngModel)]="Monthbasic" class="form-control w-50" />
+                                    </div>
+                                </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Monthly HRA Received:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="monthlyhra" [(ngModel)]="Monthhra" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Monthly Dearness allowance:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="monthlyda" [(ngModel)]="Monthda" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Monthly special allowance:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="monthlysa" [(ngModel)]="Monthsa" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Monthly Employee EPF contribution by self:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="monthlyepf" [(ngModel)]="Monthepf" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Monthly Gross Salary:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" [(ngModel)]="MonthGross" id="MonthGross" class="form-control w-50" />
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-start">
+                                <button class="btn btn-primary" id="btnBackSalaryDetail" (click)="showBasicDetails()">Back</button>
+                                <button class="btn btn-primary mx-2" id="btnSalaryDetail"
+                                    (click)="showOtherIncomeDetails()">Continue</button>
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab label="Annually">
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Annual Basic Salary:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="Annualbasic" [(ngModel)]="Annualbasic" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Annual HRA Received:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="Annualhra" [(ngModel)]="Annualhra" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Annual Dearness allowance:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="Annualda" [(ngModel)]="Annualda" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Annual special allowance:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="Annualsa" [(ngModel)]="Annualsa" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Annual Employee EPF contribution by self:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="Annualepf" [(ngModel)]="Annualepf" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Annual Gross Salary:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="AnnualGross" [(ngModel)]="AnnualGross" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                    
+                    <!-- End: Annual Salary Details -->
+                
+                            <div class="d-flex justify-content-start">
+                                <button class="btn btn-primary" id="btnBackSalaryDetail" (click)="showBasicDetails()">Back</button>
+                                <button class="btn btn-primary mx-2" id="btnSalaryDetail"
+                                    (click)="showOtherIncomeDetails()">Continue</button>
+                            </div>
+           
+                        </mat-tab>
+                    </mat-tab-group>
+                    </div>            
+                </div>
+            </div>
+
+                    <!-- <div class="tab-content" id="myTabContent"> -->
+                        <!-- Start: Month Salary Details -->
+                        <!-- <div class="tab-pane fade show active mt-3" id="monthlySalary" role="tabpanel"
+                            aria-labelledby="home-tab">
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Monthly Basic Salary:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="monthlybasic" [(ngModel)]="Monthbasic" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Monthly HRA Received:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="monthlyhra" [(ngModel)]="Monthhra" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Monthly Dearness allowance:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="monthlyda" [(ngModel)]="Monthda" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Monthly special allowance:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="monthlysa" [(ngModel)]="Monthsa" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Monthly Employee EPF contribution by self:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="monthlyepf" [(ngModel)]="Monthepf" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Monthly Gross Salary:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" [(ngModel)]="occupation" id="MonthGross" class="form-control w-50" />
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- End: Month Salary Details -->
+
+                        <!-- Start: Annual Salary Details -->
+                        <!-- <div class="tab-pane fade mt-3" id="AnnualSalary" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Annual Basic Salary:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="Annualbasic" [(ngModel)]="Annualbasic" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Annual HRA Received:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="Annualhra" [(ngModel)]="Annualhra" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Annual Dearness allowance:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="Annualda" [(ngModel)]="Annualda" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Annual special allowance:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="Annualsa" [(ngModel)]="Annualsa" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Annual Employee EPF contribution by self:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="Annualepf" [(ngModel)]="Annualepf" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="age" class="label1">Annual Gross Salary:</h6>
+                                </label>
+
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="AnnualGross" [(ngModel)]="AnnualGross" class="form-control w-50" />
+                                </div>
+                            </div>
+
+                        </div> -->
+                    <!-- </div> -->
+                    <!-- End: Annual Salary Details -->
+                <!-- </div> -->
+                <!-- <div class="row mb-3">
+                    <div class="d-flex justify-content-start">
+                        <button class="btn btn-primary" id="btnBackSalaryDetail" (click)="showBasicDetails()">Back</button>
+                        <button class="btn btn-primary mx-2" id="btnSalaryDetail"
+                            (click)="showOtherIncomeDetails()">Continue</button>
+                    </div>
+                </div> -->
+            <!-- </div> -->
+            <!-- End: Salary Details -->
+
+            <!-- Details of Other Income -->
+            <!-- {{isOtherIncomeDetailsShow}} -->
+            <div *ngIf="isOtherIncomeDetailsShow" #dvOtherIncome>
+
+                <div ng id="dvOtherIncome" >
+                    <div class="row">
+                        <div class="">
+                            <h5 class="font-weight-bold">Details of Other Income</h5>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label>
+                            <h6 for="saving" class="saving">Annual Income from Interest or saving:</h6>
+                        </label>
+
+                        <div class="flex-nowrap input-group w-50">
+                            <span class="input-group-text" id="addon-wrapping">₹</span>
+                            <input type="number" id="saving" [(ngModel)]="saving" class="form-control w-50" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label>
+                            <h6 for="deposit" class="deposit">Annual Income from Deposits:</h6>
+                        </label>
+
+                        <div class="flex-nowrap input-group w-50">
+                            <span class="input-group-text" id="addon-wrapping">₹</span>
+                            <input type="number" id="deposit" [(ngModel)]="deposit" class="form-control w-50" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label>
+                            <h6 for="rent" class="rent">Annual Income from Rentals:</h6>
+                        </label>
+
+                        <div class="flex-nowrap input-group w-50">
+                            <span class="input-group-text" id="addon-wrapping">₹</span>
+                            <input type="number" id="rent" [(ngModel)]="rent" class="form-control w-50" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label>
+                            <h6 for="source" class="source">Annual Income from other source:</h6>
+                        </label>
+
+                        <div class="flex-nowrap input-group w-50">
+                            <span class="input-group-text" id="addon-wrapping">₹</span>
+                            <input type="number" id="source" [(ngModel)]="source" class="form-control w-50" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="d-flex justify-content-start">
+                            <button class="btn btn-primary" id="btnBackOtherIncome">Back</button>
+                            <button class="btn btn-primary mx-2" id="btnOtherIncome"
+                                (click)="showCapitalGainsDetails()">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                 <!-- End: Other income Details -->
+
+                <!-- Start:  Capital gains Details -->
+                <!-- {{isCapitalGainsDetailsShow}} -->
+                <div *ngIf="isCapitalGainsDetailsShow" #dvCapitalGains>
+
+                    <div id="dvCapitalGains">
+                        <div class="row">
+                            <div class="">
+                                <h5 class="font-weight-bold">Capital gains Details</h5>
+                            </div>
+                        </div>
+                        <h6 for="Equity" class="Equity" id="equity">Equity Instruments:</h6>
+                        <div class="row ">
+                            <div class="d-flex justify-content-start">
+                                <div class="col-lg-6 ">
+                                    <label>
+                                        <p for="equity1">Short term(< 1 year)</p>
+                                    </label>
+
+                                    <div class="flex-nowrap input-group w-50">
+                                        <span class="input-group-text" id="addon-wrapping">₹</span>
+                                        <input type="number" id="equity1" [(ngModel)]="equity1" class="form-control w-auto">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 mx-3">
+                                    <label>
+                                        <p for="equity1">Short term(< 1 year)</p>
+                                    </label>
+                                    <div class="flex-nowrap input-group w-50">
+                                        <span class="input-group-text" id="addon-wrapping">₹</span>
+                                        <input type="number" id="equity2" [(ngModel)]="equity2" class="form-control w-auto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h6 for="Debit" class="debit" id="debit">Debit Investments:</h6>
+                        <div class="row ">
+                            <div class="d-flex justify-content-start">
+                                <div class="col-lg-6 mb-3">
+                                    <label>
+                                        <p for="debit1">Short term(< 3 year)</p>
+                                    </label>
+                                    <div class="flex-nowrap input-group w-50">
+                                        <span class="input-group-text" id="addon-wrapping">₹</span>
+                                        <input type="number" id="debit1" [(ngModel)]="debit1" class="form-control w-auto">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mx-3">
+                                    <label>
+                                        <p for="debit2">Long term(>= 2 year)</p>
+                                    </label>
+                                    <div class="flex-nowrap input-group w-50">
+                                        <span class="input-group-text" id="addon-wrapping">₹</span>
+                                        <input type="number" id="debit2" [(ngModel)]="debit2" class="form-control w-auto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h6 for="Shares" class="shares" id="shares">Unlisted Shares:</h6>
+                        <div class="row  mb-3">
+                            <div class="d-flex justify-content-start">
+                                <div class="col-lg-6 ">
+                                    <label>
+                                        <p for="shares1">Short term (< 2 year)</p>
+                                    </label>
+
+                                    <div class="flex-nowrap input-group w-50">
+                                        <span class="input-group-text" id="addon-wrapping">₹</span>
+
+                                        <input type="number" id="shares1" [(ngModel)]="shares1" class="form-control w-auto">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mx-3">
+                                    <label>
+                                        <p for="shares2">Long term(>= 2 year)</p>
+                                    </label>
+                                    <div class="flex-nowrap input-group w-50">
+                                        <span class="input-group-text" id="addon-wrapping">₹</span>
+                                        <input type="number" id="shares2" [(ngModel)]="shares2" class="form-control w-auto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h6 for="Estate" class="estate" id="estate">Real estate or lands:</h6>
+                        <div class="row mb-3">
+                            <div class="d-flex justify-content-start">
+                                <div class="col-lg-6 ">
+                                    <label>
+                                        <p for="estate1">Short term (< 2 year)</p>
+                                    </label>
+                                    <div class="flex-nowrap input-group w-50">
+                                        <span class="input-group-text" id="addon-wrapping">₹</span>
+                                        <input type="number" id="estate1" [(ngModel)]="estate1" class="form-control w-auto">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mx-3">
+                                    <label>
+                                        <p for="estate2">Long term (>= 2 year)</p>
+                                    </label>
+                                    <div class="flex-nowrap input-group w-50">
+                                        <span class="input-group-text" id="addon-wrapping">₹</span>
+                                        <input type="number" id="estate2" [(ngModel)]="estate2" class="form-control w-auto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+
+                            <div class="d-flex justify-content-start">
+                                <button class="btn btn-primary" id="btnBackCapitalGains">Back</button>
+                                <button class="btn btn-primary mx-3" id="btnCapitalGains"
+                                    (click)="showTaxDeductionsDetails()">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End:  Capital gains Details -->
+
+                    <!-- Start:  Tax Deductions -->
+                    <!-- {{isTaxDeductionsDetailsShow}} -->
+                    <div *ngIf="isTaxDeductionsDetailsShow" #dvTaxDeductions>
+
+                        <div id="dvTaxDeductions">
+                            <div class="row">
+                                <div class="">
+                                    <h5 class="font-weight-bold">Tax Deductions</h5>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="epf" class="epf">Section 80C deductions excluding EPF:</h6>
+                                </label>
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="epf" [(ngModel)]="epf" class="form-control w-50" maxlength="6" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="selfInsurance" class="selfInsurance">Health insurance premium for
+                                        self/family:</h6>
+                                </label>
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="selfInsurance" [(ngModel)]="selfInsurance" class="form-control w-50" maxlength="6" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="nps" class="nps">NPS investment under section 80CCD(1B):</h6>
+                                </label>
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="nps" [(ngModel)]="nps" class="form-control w-50" maxlength="5" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="senior" class="senior">Is any of the parent a senior citizen?</h6>
+                                </label>
+                                <div class=" d-flex">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="senior" id="seniory" value="1"
+                                            checked="checked" [(ngModel)]="seniory">
+                                        <label class="form-check-label" for="Yes">
+                                           Yes
+                                        </label>
+                                    </div>
+            
+                                    <div class="form-check mx-3">
+                                        <input class="form-check-input" type="radio" name="senior" value="2" id="seniorn" [(ngModel)]="seniorn">
+                                        <label class="form-check-label" for="No">
+                                          No
+                                        </label>
+                                    </div>
+            
+                                </div>
+                            </div>
+
+                            
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="parentInsurance" class="parentInsurance">Health Insurance premium for
+                                        parents:</h6>
+                                </label>
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="parentInsurance" [(ngModel)]="parentInsurance" class="form-control w-50" maxlength="5" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="educationLoanInterest" class="educationLoanInterest">Interest on education
+                                        loan:</h6>
+                                </label>
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="educationLoanInterest" [(ngModel)]="educationLoanInterest" class="form-control w-50"
+                                        maxlength="6" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="homeLoanInterest" class="homeLoanInterest">Home loan interest for self
+                                        occupied
+                                        property:</h6>
+                                </label>
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="homeLoanInterest" [(ngModel)]="homeLoanInterest" class="form-control w-50" maxlength="6" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label>
+                                    <h6 for="rent" class="rent">Home loan interest for rented property:</h6>
+                                </label>
+                                <div class="flex-nowrap input-group w-50">
+                                    <span class="input-group-text" id="addon-wrapping">₹</span>
+                                    <input type="number" id="rent" [(ngModel)]="rent" class="form-control w-50" maxlength="6" />
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="d-flex justify-content-start">
+                                    <button class="btn btn-primary" id="btnBackTaxDeductions">Back</button>
+                                    <button class="btn btn-primary mx-3" id="btnTaxDeductions" (click)="showTaxPay()">Continue
+                                        Now</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End: Tax Deductions -->
+
+                        <!-- Start: Tax Pay -->
+                        <!-- {{isTaxPayShow}} -->
+                        <div *ngIf="isTaxPayShow" #dvTaxPay>
+
+                            <div id="dvResult">
+                                <div class="row mb-3">
+                                    <div>
+                                        <td><span id="tax-Pay"></span></td>
+                                        <div class="d-flex">
+                                            <div class="fa fa-inr">Total Tax: &#8377; </div>
+                                            <p id="taxamount" class="mx-2">{{finalTaxAmount}}</p>
+                                        </div>
+
+                                        <div>
+                                            <table class="table">
+                                                <tbody>
+
+                                                    <tr>
+                                                        <th scope="row">Gross Income</th>
+                                                        <td><span id="gross-income">{{grossincome}}</span></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th scope="row">Capital Gain</th>
+                                                        <td><span id="capital-gain">{{capitalgain}}</span></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th scope="row">Tax Deduction</th>
+                                                        <td><span id="tax-deduction">{{taxdeduction}}</span></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th scope="row">Tax Excemptions</th>
+                                                        <td><span id="tax-excemptions"></span></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th scope="row">Total Income</th>
+                                                        <td><span id="total-income">{{totalincome}}</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="">
+                                                <button class="btn btn-primary" (click)="Calculate()">Recalculate</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- End: Tax Pay -->
+                            <!-- {{isReCalculateShow}} -->
+                            <div *ngIf="isReCalculateShow" #dvReCalculateShow>
+
+                            </div>
+                        </div>
+                    </div>
